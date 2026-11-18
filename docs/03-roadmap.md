@@ -11,7 +11,7 @@ Cada fase se cierra con Pull Requests revisados. Los criterios de aceptación so
 | Existen `docs/00-decisiones.md` a `docs/03-roadmap.md` con decisiones, límites de confianza, secretos y amenazas cubiertas | Revisión del PR |
 | El monorepo instala desde cero y pasa typecheck, lint y tests | `rm -rf node_modules && pnpm install --frozen-lockfile && pnpm typecheck && pnpm lint && pnpm test` |
 | CI en verde en cada PR con typecheck, lint y test | Historial de checks de GitHub |
-| Ningún archivo de código contiene claves, seeds ni tokens | `grep -rEn "(ghp_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|M/44'|abandon ability)" --include="*.{ts,tsx,js,json,yml}" .` no produce resultados fuera de este documento |
+| Ningún archivo de código contiene claves, seeds ni tokens | `grep -rEn "(ghp_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|M/44'|abandon ability)" --include="*.ts" --include="*.tsx" --include="*.json" --include="*.yml" --exclude="ci.yml" .` no produce resultados (idéntico al job `secret-scan` del CI) |
 | No existe UI de wallet ni lógica criptográfica | Revisión del diff: solo stubs tipados |
 
 ## Fase 1 — Wallet EVM + BTC
@@ -27,6 +27,8 @@ Cada fase se cierra con Pull Requests revisados. Los criterios de aceptación so
 | La clave no sale del navegador | Inspección de red en DevTools durante todo el flujo: ninguna petición contiene seed, clave privada ni passphrase; los hashes se verifican en exploradores públicos |
 | Replay protegido: chainId/nonce explícitos en EVM | Tests de `wallet-core` (T4) |
 | Cero secretos en el backend | Revisión de esquema de DB y del grep de CI |
+
+Deuda registrada en fase 0: `apps/web` sin tests hasta que exista lógica de UI verificable; el CI ejecuta `pnpm -r --if-present test` y esta deuda se cierra con el primer PR que aporte interfaz verificable.
 
 ## Fase 2 — QR y panel de comercio
 
@@ -61,4 +63,4 @@ Condición previa: Fases 1 a 3 aprobadas y, idealmente, una revisión de segurid
 | Criterio de aceptación | Verificación |
 |---|---|
 | Diseño documentado y aprobado antes de implementar | Revisión del PR de diseño |
-| Todo lockeo de fondos pasa por el escrow on-chain de Fase 3, nunca por custodia de servidor | Revisión de arquitectura del PR |
+| Todo bloqueo de fondos pasa por el escrow on-chain de Fase 3, nunca por custodia de servidor | Revisión de arquitectura del PR |

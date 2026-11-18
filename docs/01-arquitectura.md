@@ -39,17 +39,17 @@
 |------|--------------------|--------------|
 | `apps/web` + `wallet-core` en el navegador | Alto (código propio, auditado) | Es la única zona donde existe la seed o las claves derivadas. Si el navegador está comprometido (malware/XSS), el activo local queda expuesto: se mitiga pero no se elimina (ver T1/T2). |
 | `apps/api` + Postgres | Confianza baja como custodio | Por diseño no recibe material criptográfico. Un compromiso total del servidor NO expone fondos; a lo sumo corrompe facturas y reputación (T7). |
-| RPC EVM y Esplora | Parcial | Pueden mentir en saldos, nonces o difusión de transacciones. Toda lectura crítica se verifica on-chain tras firmar (T6). |
+| RPC EVM y Esplora | Parcial | Pueden mentir en saldos, nonces o propagación de transacciones. Toda lectura crítica se verifica on-chain tras firmar (T6). |
 | Nodo Foundry / contratos (Fase 3) | Alto en código, verificable | El escrow 2-de-3 se audita con tests y fuzzing antes de tocar mainnet. |
 
-La propiedad fundacional: **la confianza alta reside en el dispositivo, no en el servidor**. Ninguna ruta de red transporta seed, claves privadas ni passphrase, ni en headers, ni en body, ni en logs.
+La propiedad fundacional: **la confianza alta reside en el dispositivo, no en el servidor**. Ninguna ruta de red transporta seed, claves privadas ni passphrase, ni en las cabeceras, ni en el cuerpo, ni en los registros.
 
 ## Dónde vive cada secreto
 
 | Secreto | Dónde vive | Dónde PROHIBIDO que viva |
 |---------|-----------|--------------------------|
 | Frase semilla BIP-39 | Memoria del navegador mientras se usa; en reposo, cifrada en IndexedDB con AES-256-GCM usando la clave Argon2id de la passphrase del usuario | Servidor, Postgres, logs, telemetría, CI, código |
-| Passphrase de cifrado | Memoria del usuario mientras usa la wallet | Persistencia alguna; no hay recuperación de servidor (trade-off consciente de no custodia) |
+| Passphrase de cifrado | Memoria del usuario mientras usa la wallet | Persistencia alguna; no hay recuperación de servidor (renuncia consciente de la no custodia) |
 | Claves privadas EVM/BTC | Memoria, derivadas bajo demanda desde la seed | Servidor, base de datos, tests, fixtures |
 | Tokens de GitHub / CI | Secrets de GitHub Actions; entorno local del desarrollador | Repositorio, commits, scripts, documentación |
 | Credenciales de Postgres | Variables de entorno del despliegue de `apps/api` | Repositorio (`.env` ignorado por git), código |
