@@ -1,0 +1,9 @@
+{
+  "name": "@nexora/contracts",
+  "private": true,
+  "scripts": {
+    "typecheck": "echo \"solidity: se verifica con forge en fase 3\" && exit 0",
+    "lint": "echo \"solidity: se verifica con forge en fase 3\" && exit 0",
+    "test": "echo \"solidity: se verifica con forge en fase 3\" && exit 0"
+  }
+}

@@ -1,0 +1,8 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+sol_version = "0.8.26"
+
+# El escrow 2-de-3 (fase 3) vive aqui. Sin contratos en fase 0:
+# solo el esqueleto de Foundry y su estructura de directorios.
