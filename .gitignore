@@ -1,0 +1,26 @@
+# dependencias
+node_modules/
+.pnpm-store/
+
+# construcciones
+dist/
+.next/
+out/
+coverage/
+cache/
+
+# entornos: prohibido confirmar credenciales (ver docs/01-arquitectura.md)
+.env
+.env.*
+!.env.example
+
+# foundry
+packages/contracts/out/
+packages/contracts/cache/
+packages/contracts/lib/
+
+# sistema
+.DS_Store
+*.log
+*.tsbuildinfo
+next-env.d.ts

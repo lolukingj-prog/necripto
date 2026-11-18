@@ -1,0 +1,9 @@
+{
+  "name": "@nexora/ui",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "test": "echo \"sin tests todavia\" && exit 0"
+  }
+}

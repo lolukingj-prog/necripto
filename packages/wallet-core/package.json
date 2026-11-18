@@ -1,0 +1,12 @@
+{
+  "name": "@nexora/wallet-core",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "3.0.4"
+  }
+}
