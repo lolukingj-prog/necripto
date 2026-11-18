@@ -5,8 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src/",
-    "test": "echo \"sin tests todavia\" && exit 0"
+    "lint": "eslint src/"
   },
   "dependencies": {
     "next": "15.1.6",
